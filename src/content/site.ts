@@ -15,6 +15,8 @@ export const site = {
   name: "Kerthik Dharshan",
   role: "AI & ML Engineer",
   location: "Chennai, Tamil Nadu",
+  /** The resume PDF, served unchanged from /public; opens in the browser's viewer. */
+  resume: "/Kerthik-Dharshan-Resume.pdf",
   // Your own domain if set; otherwise the production URL Vercel provides
   // automatically (e.g. dharshan-portfolio.vercel.app); localhost in development.
   url:

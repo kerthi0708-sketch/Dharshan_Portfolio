@@ -94,6 +94,15 @@ export function About() {
                 >
                   Get in touch
                 </a>
+                <a
+                  href={site.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-line-strong px-5 py-2.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-fg-2 transition-colors hover:border-violet hover:text-fg"
+                >
+                  View resume <span aria-hidden="true">↗</span>
+                  <span className="sr-only"> (PDF, opens in a new tab)</span>
+                </a>
               </Reveal>
             </div>
 

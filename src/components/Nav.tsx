@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { site } from "@/content/site";
 
 const LINKS = [
   { href: "#top", label: "About", mobile: false },
@@ -60,6 +61,17 @@ export function Nav() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-line-strong px-3 py-1.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-fg transition-colors hover:border-accent hover:text-accent"
+              >
+                Resume <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (PDF, opens in a new tab)</span>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
