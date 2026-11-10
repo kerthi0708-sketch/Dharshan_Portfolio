@@ -40,7 +40,7 @@ export function About() {
             <div className="border-b border-violet/20 p-6 sm:p-10 lg:col-span-7 lg:border-b-0 lg:border-r lg:p-11 xl:px-14">
               <h2 id="about-title" className="eyebrow text-violet">About me</h2>
 
-              <h1 className="display mt-5 text-[clamp(2.9rem,6vw,5.4rem)] uppercase">
+              <h1 className="display mt-4 text-[clamp(2.9rem,5.6vw,5rem)] uppercase">
                 <WordsReveal text="Kerthik Dharshan" />
               </h1>
               <Reveal delay={200}>
@@ -52,21 +52,22 @@ export function About() {
               </Reveal>
 
               <Reveal delay={300}>
-                <p className="mt-7 max-w-2xl text-lg leading-relaxed text-fg-2 md:text-xl md:leading-relaxed">
-                  I develop and improve AI and machine-learning workflows, from data and training to
-                  evaluation and deployment on edge devices. I hold a Master&apos;s in Data Science and
-                  completed an AI engineering internship at ISRO.
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-2 md:text-xl md:leading-[1.55]">
+                  I’m an AI &amp; ML Engineer focused on building and improving intelligent products, from
+                  machine-learning workflows and model training to AI-powered applications and edge
+                  deployment. I hold a Master’s in Data Science and bring hands-on experience developing
+                  practical AI systems.
                 </p>
               </Reveal>
               <Reveal delay={380}>
                 <p className="mt-4 max-w-2xl leading-relaxed text-muted">
-                  My work spans object detection and motion recognition for edge hardware, AI agents
-                  that call tools and return structured output, grounded systems that answer only from
-                  validated records, and the APIs and interfaces that turn models into products.
+                  My work spans computer vision and motion recognition for edge hardware, AI agents and
+                  tool-based workflows, grounded AI systems built around validated data, and the APIs and
+                  interfaces that turn complex AI capabilities into real-world products.
                 </p>
               </Reveal>
 
-              <ul className="mt-8 grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3" aria-label="Core capabilities">
+              <ul className="mt-7 grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3" aria-label="Core capabilities">
                 {FOCUS.map((f, i) => (
                   <Reveal as="li" key={f.k} delay={420 + i * 50} className="border-t border-line py-4">
                     <p className="flex items-center gap-2 text-fg">
