@@ -15,7 +15,11 @@ export const site = {
   name: "Kerthik Dharshan",
   role: "AI & ML Engineer",
   location: "Chennai, Tamil Nadu",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  // Your own domain if set; otherwise the production URL Vercel provides
+  // automatically (e.g. dharshan-portfolio.vercel.app); localhost in development.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
   description:
     "Kerthik Dharshan is an AI & ML Engineer working across machine learning, Edge AI, computer vision, grounded AI systems and full-stack engineering.",
   links: {

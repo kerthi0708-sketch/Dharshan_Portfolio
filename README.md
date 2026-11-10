@@ -15,18 +15,23 @@ npm run build    # production build (fully static)
 npm run lint
 ```
 
-## Configure contact links
+## Deploy on Vercel
 
-Copy `.env.example` to `.env.local` (or set the same variables in Vercel):
+Import the GitHub repo in Vercel. The defaults are correct (framework: Next.js, build:
+`next build`); no environment variables are required.
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical URL for metadata, sitemap, robots |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Email link in Contact |
-| `NEXT_PUBLIC_LINKEDIN_URL` | LinkedIn link |
-| `NEXT_PUBLIC_GITHUB_URL` | GitHub link |
+## Configuration (optional)
 
-Empty values are not rendered — no placeholder URLs ship.
+Set these in Vercel, or in `.env.local` locally (see `.env.example`):
+
+| Variable | Purpose | If not set |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL for metadata, sitemap, robots | Vercel's production URL |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Email link in Contact | Email from the resume |
+| `NEXT_PUBLIC_LINKEDIN_URL` | LinkedIn link | LinkedIn from the resume |
+| `NEXT_PUBLIC_GITHUB_URL` | GitHub link | Not shown |
+
+Set `NEXT_PUBLIC_SITE_URL` when you add a custom domain. Changes apply on the next deploy.
 
 ## Structure
 
@@ -36,14 +41,13 @@ src/
   content/site.ts       identity + contact config
   assets/work/          optimised product screenshots (WebP)
   components/
-    hero/               kinetic headline (variable-font axes react to the pointer)
-    about/              About + hanging ID card (3D physics on desktop, 2D pendulum fallback)
+    about/              landing About section + hanging ID card (3D physics on desktop, 2D pendulum fallback)
     work/
       petaledge/        flagship: sticky DATA → TRAIN → OPTIMIZE → DEPLOY journey, layered depth screenshots
       codecraft/        block workspace that assembles a real example program
       pramoj/           agent run console (stages, SSE events, board toggle) + command loop
       petalyellow/      calm wellness section with interactive Health Age phone
-    sections/           Skills, Experience + Education, Contact
+    sections/           Skills, Experience, Education, Contact
     ui/                 Reveal, WordsReveal, ScrollDrift
 ```
 
