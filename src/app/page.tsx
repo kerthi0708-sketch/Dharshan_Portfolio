@@ -17,6 +17,7 @@ export default function Home() {
       <Nav />
       <main id="main">
         <About />
+        <Experience />
         <Marquee />
         <section id="work" aria-labelledby="work-title">
           <WorkIntro />
@@ -26,7 +27,6 @@ export default function Home() {
           <PetalYellow />
         </section>
         <Skills />
-        <Experience />
         <Education />
         <Contact />
       </main>

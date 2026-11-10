@@ -149,7 +149,7 @@ export function PetalEdge() {
         <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-edge/[0.07] blur-[140px]" />
         <div className="relative mx-auto max-w-[1500px]">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-5">
-            <p className="eyebrow"><span className="text-edge">01</span> / 04 — Flagship</p>
+            <p className="eyebrow"><span className="text-edge">Flagship</span></p>
             <p className="eyebrow">Edge AI platform · 2026</p>
           </div>
 

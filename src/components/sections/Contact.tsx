@@ -14,7 +14,7 @@ export function Contact() {
       <div className="px-4 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-[1500px]">
           <Reveal className="flex items-center justify-between border-b border-line pb-5">
-            <p className="eyebrow"><span className="text-accent">06</span> — Contact</p>
+            <p className="eyebrow"><span className="text-accent">Contact</span></p>
             <p className="eyebrow hidden sm:block">Open to conversations</p>
           </Reveal>
           <Reveal>

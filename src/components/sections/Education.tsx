@@ -17,7 +17,7 @@ export function Education() {
     <section id="education" aria-labelledby="education-title" className="border-t border-line px-4 py-28 sm:px-8 md:py-36 lg:px-12">
       <div className="mx-auto max-w-[1500px]">
         <Reveal className="flex items-center justify-between border-b border-line pb-5">
-          <p className="eyebrow"><span className="text-accent">05</span> — Education</p>
+          <p className="eyebrow"><span className="text-accent">Education</span></p>
           <p className="eyebrow hidden sm:block">Foundations</p>
         </Reveal>
 

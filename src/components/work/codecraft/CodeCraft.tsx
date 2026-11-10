@@ -23,7 +23,7 @@ export function CodeCraft() {
     <article id="codecraft" aria-labelledby="codecraft-title" className="relative overflow-hidden bg-[#0e0d0a] px-4 py-28 sm:px-8 md:py-36 lg:px-12">
       <div className="mx-auto max-w-[1500px]">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-5">
-          <p className="eyebrow"><span className="text-craft">02</span> / 04 — AI agent</p>
+          <p className="eyebrow"><span className="text-craft">AI agent</span></p>
           <p className="eyebrow">Educational robotics · 2026</p>
         </div>
 

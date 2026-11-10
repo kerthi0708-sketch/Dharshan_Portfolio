@@ -54,7 +54,7 @@ export function PetalYellow() {
       <div className="relative mx-auto max-w-[1500px]">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 pb-5">
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">
-            <span className="text-[#a8790f]">04</span> / 04 — Grounded AI
+            <span className="text-[#a8790f]">Grounded AI</span>
           </p>
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Health &amp; fitness · 2026</p>
         </div>

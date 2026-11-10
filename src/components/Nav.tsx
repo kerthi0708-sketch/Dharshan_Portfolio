@@ -5,9 +5,9 @@ import { site } from "@/content/site";
 
 const LINKS = [
   { href: "#top", label: "About", mobile: false },
+  { href: "#experience", label: "Experience", mobile: false },
   { href: "#work", label: "Work", mobile: true },
   { href: "#skills", label: "Skills", mobile: false },
-  { href: "#experience", label: "Experience", mobile: false },
   { href: "#contact", label: "Contact", mobile: true },
 ];
 

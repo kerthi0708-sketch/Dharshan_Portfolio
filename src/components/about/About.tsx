@@ -24,10 +24,7 @@ export function About() {
     >
       <span id="about" className="absolute top-0" aria-hidden="true" />
       <div className="mx-auto max-w-[1500px]">
-        <Reveal className="mb-5 flex items-center justify-between">
-          <p className="eyebrow">
-            <span className="text-violet">01</span> — About
-          </p>
+        <Reveal className="mb-5 flex items-center justify-end">
           <p className="eyebrow">{site.location}</p>
         </Reveal>
 

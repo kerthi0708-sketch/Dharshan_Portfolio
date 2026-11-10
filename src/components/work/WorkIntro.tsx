@@ -14,7 +14,7 @@ export function WorkIntro() {
       <div className="mx-auto max-w-[1500px]">
         <Reveal className="flex items-center justify-between border-b border-line pb-5">
           <p className="eyebrow">
-            <span className="text-accent">02</span> — Selected work
+            <span className="text-accent">Selected work</span>
           </p>
           <p className="eyebrow">Four products · 2026</p>
         </Reveal>

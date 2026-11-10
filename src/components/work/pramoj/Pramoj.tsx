@@ -22,7 +22,7 @@ export function Pramoj() {
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 top-40 h-[500px] w-[500px] rounded-full bg-pramoj/[0.08] blur-[130px]" />
       <div className="relative mx-auto max-w-[1500px]">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
-          <p className="eyebrow"><span className="text-pramoj">03</span> / 04 — Generative AI workflow</p>
+          <p className="eyebrow"><span className="text-pramoj">Generative AI workflow</span></p>
           <p className="eyebrow">AIoT app creation · 2026</p>
         </div>
 

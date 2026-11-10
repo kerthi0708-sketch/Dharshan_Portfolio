@@ -34,7 +34,7 @@ export function Skills() {
     <section id="skills" aria-labelledby="skills-title" className="px-4 py-28 sm:px-8 md:py-36 lg:px-12">
       <div className="mx-auto max-w-[1500px]">
         <Reveal className="flex items-center justify-between border-b border-line pb-5">
-          <p className="eyebrow"><span className="text-accent">03</span> — Skills</p>
+          <p className="eyebrow"><span className="text-accent">Skills</span></p>
           <p className="eyebrow hidden sm:block">Toolkit</p>
         </Reveal>
 
