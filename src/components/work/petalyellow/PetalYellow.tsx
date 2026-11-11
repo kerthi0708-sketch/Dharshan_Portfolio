@@ -12,39 +12,71 @@ import { HealthPhone } from "./HealthPhone";
 
 const GROUNDING = [
   {
-    t: "Identity is fixed by the server",
-    d: "The member ID is never a tool parameter. Every data tool is bound to the member the server resolved, so a prompt can't point the model at someone else's records.",
+    t: "Personalized data access",
+    d: "Each AI request is connected to the correct member and retrieves only the information relevant to that conversation.",
   },
   {
-    t: "Read-only data access",
-    d: "Gym data is read through SELECT-only repositories on a separate read-only connection. Each transaction is marked READ ONLY and rolled back.",
+    t: "Grounded in real records",
+    d: "The assistant uses validated member data for health, fitness and wellness insights instead of relying on generic or unsupported responses.",
   },
   {
-    t: "Tool-based retrieval with allow-lists",
-    d: "Gemini asks for data by calling tools with modules from a fixed enum. Unknown modules, bad dates and unknown tools return structured errors instead of raising.",
+    t: "Controlled AI tool access",
+    d: "Tool-based data retrieval ensures the AI accesses only approved information needed to answer a user's question.",
   },
   {
-    t: "The server writes the numbers",
-    d: "The Health Age headline and every snapshot row, including its status band, are computed deterministically on the server. The model writes only three short insights.",
+    t: "Verified health insights",
+    d: "Important health values and snapshots are controlled by the application, helping ensure the AI presents accurate information.",
   },
   {
-    t: "Citations are checked",
-    d: "Each insight must cite records that actually exist, and any number it quotes must match the cited value. Insights that fail are rejected.",
+    t: "Response validation",
+    d: "AI-generated insights are checked against available records before they are presented to the user.",
   },
   {
-    t: "Fallback templates",
-    d: "A rejected insight is replaced with a safe template anchored to the snapshot. Internal citation fields are removed before the response leaves the server.",
+    t: "Safe fallback responses",
+    d: "If an AI response cannot be validated, the system uses a reliable fallback instead of presenting unsupported information.",
   },
 ];
 
-const MODULES = ["activity", "targets", "meal", "workout", "medical", "metrics", "health_scores", "health_score_details", "membership"];
+// Every capability below is implemented in the Petal Yellow AI backend
+// (routes/*, services/*). Member-data chat is enabled by a feature setting.
+// These are product features; personal contributions are listed separately.
+const CAPABILITIES = [
+  { t: "Health Age insights", d: "Explains a member's Heart, Body and Lifestyle Age with a strength, an opportunity and a next milestone." },
+  { t: "Meal photo analysis", d: "Identifies the foods in a meal photo and estimates calories, protein, carbs, fats and fibre." },
+  { t: "Personal workout plans", d: "Builds a 7-day workout plan from a member's medical intake form and uploaded health reports." },
+  { t: "Diet plans", d: "Produces a dietitian-style plan: daily nutrition, meals, and foods to prefer, limit or avoid." },
+  { t: "Body transformation analysis", d: "Compares before and after photos to describe visible progress and suggest next workouts." },
+  { t: "Posture analysis", d: "Scores posture from body landmarks with a rules engine, then explains the findings in plain language." },
+  { t: "Nutrition calculator", d: "Estimates calories and macros for any food and portion size." },
+];
+
+const ASSISTANT_CAN = [
+  "Answers personal questions from the member's own records when member data is enabled",
+  "Compares today's readings with the member's personal baseline and goals",
+  "Understands dates like \u201cyesterday\u201d or \u201c3 days ago\u201d",
+  "Suggests three relevant follow-up questions after each answer",
+  "Remembers the recent conversation and names each chat",
+  "Replies in the member's language and declines off-topic requests",
+];
+
+const DATA_AREAS = [
+  "Activity & steps",
+  "Daily targets",
+  "Meal plan",
+  "Workout plan",
+  "Medical history",
+  "Health metrics",
+  "Health scores",
+  "Sleep, HRV & resting heart rate",
+  "Membership",
+];
 
 const PERF = [
-  ["Phase timing", "Every Health Age request logs per-phase timings: baseline, context, prompt, Gemini, validation, assembly, persistence."],
-  ["Thinking budgets", "Separate, configurable thinking budgets for routing and answering, after profiling showed thinking tokens dominated response time."],
-  ["Sequential-call analysis", "The JSON finalize call starts in parallel with the tool round and is discarded if a tool is actually called."],
-  ["Connection pooling", "A shared keep-alive HTTP client to Gemini, closed cleanly on shutdown."],
-  ["Redundant queries removed", "The member baseline is read once per request, not twice. Module fetches run concurrently, with a short-lived context cache that never caches medical data."],
+  ["Performance profiling", "Identified AI response latency and measured each stage of the Health Age request."],
+  ["AI response optimization", "Improved the generation workflow while preserving grounded and validated responses."],
+  ["Thinking configuration", "Introduced configurable AI reasoning settings to balance response quality and speed."],
+  ["Database efficiency", "Removed redundant queries and improved how member data is retrieved."],
+  ["Connection management", "Added reusable HTTP connections to improve the efficiency of AI service communication."],
 ];
 
 export function PetalYellow() {
@@ -54,7 +86,7 @@ export function PetalYellow() {
       <div className="relative mx-auto max-w-[1500px]">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/10 pb-5">
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">
-            <span className="text-[#a8790f]">Grounded AI</span>
+            <span className="text-[#a8790f]">Personalized AI</span>
           </p>
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Health &amp; fitness · 2026</p>
         </div>
@@ -72,17 +104,90 @@ export function PetalYellow() {
           </div>
           <div className="lg:col-span-5 lg:pt-6">
             <Reveal>
-              <p className="text-xl leading-snug md:text-2xl">Grounded AI for personalised health and fitness insights.</p>
+              <p className="text-xl leading-snug md:text-2xl">A personalized AI health and fitness assistant, grounded in real member data.</p>
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-5 leading-relaxed text-black/60">
-                An AI assistant for a gym and wellness platform. Instead of giving generic advice, it
-                retrieves the member&apos;s own records (membership, workouts, meals, activity, sleep,
-                HRV, resting heart rate and health scores) and answers from them.
+                Petal Yellow AI is the intelligence behind a gym and wellness platform. Members chat with an
+                AI assistant designed to answer personalized questions about workouts, activity, sleep,
+                recovery, nutrition and health scores, and use AI features for meals, training plans, diet,
+                posture and body progress.
               </p>
             </Reveal>
           </div>
         </div>
+
+        {/* AI capabilities */}
+        <div className="mt-20">
+          <Reveal className="flex items-end justify-between border-b border-black/10 pb-5">
+            <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Product capabilities</p>
+            <p className="hidden font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50 sm:block">8 AI features · one platform</p>
+          </Reveal>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <Reveal as="li" className="flex flex-col justify-between rounded-2xl bg-[#1b1a17] p-5 text-cream sm:col-span-2">
+              <div>
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-yellow">Main capability</p>
+                <p className="mt-3 text-2xl font-semibold tracking-tight">Member AI Assistant</p>
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-cream/70">
+                  A personal chat assistant for gym members, designed to answer questions about training,
+                  food, sleep, recovery, health scores and membership using the member&apos;s own records.
+                </p>
+              </div>
+              <a href="#py-assistant" className="mt-6 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-yellow hover:text-cream">
+                How it works ↓
+              </a>
+            </Reveal>
+            {CAPABILITIES.map((c, i) => (
+              <Reveal as="li" key={c.t} delay={60 + i * 50} className="rounded-2xl bg-white/60 p-5 ring-1 ring-black/5">
+                <p className="font-medium">{c.t}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-black/60">{c.d}</p>
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal>
+            <p className="mt-4 text-xs text-black/45">
+              Features of the Petal Yellow AI platform. My personal contribution is listed separately below.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Member AI Assistant */}
+        <Reveal className="mt-20 rounded-3xl bg-white/70 p-6 ring-1 ring-black/5 sm:p-10">
+          <div id="py-assistant" className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Member AI Assistant</p>
+              <h4 className="mt-4 max-w-xl text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
+                Ask about training, food, sleep and progress, answered from your own data.
+              </h4>
+              <p className="mt-5 max-w-xl leading-relaxed text-black/60">
+                The AI is designed to answer personalized questions using relevant member records when the
+                member-data feature is enabled. Instead of loading a whole database into every request, it
+                fetches only the records a question needs, then answers in plain language.
+              </p>
+              <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+                {ASSISTANT_CAN.map((a) => (
+                  <li key={a} className="flex gap-3 border-t border-black/10 py-3 text-sm leading-relaxed text-black/70">
+                    <span className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#a8790f]" aria-hidden="true" />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Member data it can use</p>
+              <ul className="mt-4 flex flex-wrap gap-2" aria-label="Member data the assistant can use">
+                {DATA_AREAS.map((m) => (
+                  <li key={m} className="rounded-full bg-[#1b1a17]/[0.06] px-3 py-1.5 font-mono text-[0.68rem] text-black/70">
+                    {m}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-xs leading-relaxed text-black/45">
+                Member-data answers are controlled by a feature setting. Medical data is never cached.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
         {/* Health Age */}
         <div className="mt-20 grid items-start gap-16 lg:grid-cols-12">
@@ -94,20 +199,19 @@ export function PetalYellow() {
 
           <div className="lg:col-span-7">
             <Reveal>
-              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Health Age AI</p>
+              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Feature spotlight · Health Age AI</p>
               <h4 className="mt-4 max-w-xl text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
                 It explains your Heart, Body and Lifestyle Age. It never recalculates them.
               </h4>
               <p className="mt-5 max-w-xl leading-relaxed text-black/60">
-                A dedicated endpoint turns a stored age into a short explanation: the age compared
-                with your real age, your biggest strength, your biggest opportunity, a next milestone,
-                and a snapshot of the records behind it. The model loops through tools in text mode,
-                then finishes in a strict JSON schema validated with Pydantic.
+                The Health Age AI feature transforms existing health scores into clear, personalized
+                insights. It explains a member&apos;s biggest strength, key opportunity and next milestone
+                while keeping stored health values authoritative and grounded in verified records.
               </p>
             </Reveal>
 
             <Reveal className="mt-14">
-              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Grounded by design</p>
+              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Trustworthy AI by design</p>
             </Reveal>
             <ol className="mt-4">
               {GROUNDING.map((g, i) => (
@@ -123,23 +227,6 @@ export function PetalYellow() {
               ))}
             </ol>
 
-            {/* Chat assistant */}
-            <Reveal className="mt-16 rounded-3xl bg-white/70 p-6 ring-1 ring-black/5 sm:p-8">
-              <p className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-black/50">Member chatbot</p>
-              <p className="mt-3 max-w-xl leading-relaxed text-black/70">
-                A keyword intent router prefetches the likely data while Gemini decides which modules it
-                needs through a single <span className="font-mono text-[0.85em]">get_member_context</span> tool,
-                in a bounded loop of up to three rounds. Replies are sanitised, off-topic requests get a fixed
-                refusal, and a short follow-up call suggests next questions.
-              </p>
-              <ul className="mt-6 flex flex-wrap gap-2" aria-label="Data modules available to the assistant">
-                {MODULES.map((m) => (
-                  <li key={m} className="rounded-full bg-[#1b1a17]/[0.06] px-3 py-1 font-mono text-[0.68rem] text-black/70">
-                    {m}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
           </div>
         </div>
 
@@ -185,11 +272,15 @@ export function PetalYellow() {
               tone="light"
               accent="#a8790f"
               items={[
-                "Grounded AI architecture: tool-based retrieval, server-side validation and fallback templates.",
-                "The Health Age AI explanation system for Heart, Body and Lifestyle Age.",
-                "Repository and service layers over the gym platform's database, read-only by design.",
-                "Latency profiling and the performance work: thinking budgets, parallel finalize, pooling and query clean-up.",
+                "Improved the personalized AI experience by integrating relevant member health, fitness and wellness data into AI workflows.",
+                "Built and extended Gemini tool-calling workflows to support reliable, reusable AI interactions.",
+                "Developed grounded AI validation and fallback mechanisms to help keep personalized responses accurate and reliable.",
+                "Built the repository and service architecture for retrieving health scores and member health details.",
+                "Profiled and optimized the AI response pipeline to improve performance and reduce unnecessary processing.",
+                "Designed and implemented the Health Age AI workflow for Heart Age, Body Age and Lifestyle Age as a specialized feature within the broader AI platform.",
+                "Designed the premium, structured AI response experience for personalized Health Age insights.",
               ]}
+              note="My work focused on building reliable and personalized AI experiences across data integration, AI workflows, validation, response design and performance optimization. Health Age was one specialized feature within this broader work."
             />
           </div>
           <div className="lg:col-span-7">
@@ -212,7 +303,7 @@ export function PetalYellow() {
             groups={[
               { label: "API", items: ["Python", "FastAPI", "Pydantic", "Service layer", "Intent routing"] },
               { label: "Data", items: ["PostgreSQL", "SQLAlchemy 2 (async)", "Alembic migrations", "JSONB", "Repository pattern", "Context builder"] },
-              { label: "AI", items: ["Google Gemini over REST (httpx)", "Function / tool calling", "Structured JSON output", "Server-side output validation"] },
+              { label: "AI", items: ["Google Gemini over REST (httpx)", "Function / tool calling", "Structured JSON output", "Multimodal input (photos, PDF reports)", "Server-side output validation"] },
               { label: "Quality", items: ["pytest coverage for grounding, the tool loop, read-only sessions and caching", "Per-phase timing logs"] },
             ]}
           />

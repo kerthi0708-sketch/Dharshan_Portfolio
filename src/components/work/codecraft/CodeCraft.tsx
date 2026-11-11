@@ -114,12 +114,13 @@ export function CodeCraft() {
             <Contribution
               accent="var(--craft)"
               items={[
-                "Rebuilt the AI workflow's output handling: JSON extraction and program validation, plus the AgentResponse validator that drives the self-correction loop.",
-                "Added the serving-path guard that turns an unusable program into a safe chat reply.",
-                "Fixed chat history so it records the task the agent actually returned.",
-                "Raised the agent's tool-call budget from 5 to 12, with the reason documented in code.",
-                "Wrote the OpenAPI descriptions, examples and JWT setup for the docs, and added the health endpoint.",
+                "Took ownership of improving the AI workflow, including structured JSON output handling, program validation and the self-correction flow.",
+                "Strengthened error handling with safeguards that turn unusable program outputs into safe, meaningful chat responses.",
+                "Improved chat history handling so it accurately records the tasks and results returned by the AI agent.",
+                "Optimized the agent workflow and tool-calling configuration for more reliable task completion.",
+                "Improved the API and developer experience with OpenAPI descriptions, examples, JWT configuration, documentation support and a health endpoint.",
               ]}
+              note="Initially focused on targeted improvements, then took broader ownership of the AI workflow, its reliability, and ongoing project maintenance."
             />
             <Reveal>
               <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">Five response tasks</p>

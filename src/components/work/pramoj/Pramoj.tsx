@@ -126,11 +126,12 @@ export function Pramoj() {
             <Contribution
               accent="var(--pramoj)"
               items={[
-                "Reworked the agent's workflow: rewrote the main system prompt and updated the command tools and streaming core.",
-                "Added Raspberry Pi as a second target: board routing, a dedicated Pi prompt and Pi example/brick compatibility data.",
-                "Built the conversation-flow state machine that keeps the build conversation on track.",
-                "Built the Pi hardware layer: a UART line bridge to a USB-attached UNO R4 Minima and an upload-and-run script.",
+                "Took ownership of improving the agent workflow, including the main system prompt, command tools and streaming implementation.",
+                "Expanded the platform with Raspberry Pi as a second target, including board routing, a dedicated Pi prompt and compatibility data.",
+                "Developed the conversation-flow state machine to keep the AI-assisted build process structured and on track.",
+                "Implemented the Raspberry Pi hardware integration layer, including a UART bridge to a USB-attached UNO R4 Minima and an upload-and-run workflow.",
               ]}
+              note="Initially focused on improving the AI workflow, then expanded my contribution across the platform's Raspberry Pi support, conversation flow, and hardware integration."
             />
 
             <Reveal>
