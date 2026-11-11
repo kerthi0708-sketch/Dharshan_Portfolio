@@ -1,11 +1,12 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { ScrollDrift } from "@/components/ui/ScrollDrift";
+import { WorkShowcase, type ShowcaseProject } from "./WorkShowcase";
 
-const INDEX = [
-  { id: "petaledge", n: "01", name: "PetalEdge", line: "End-to-end Edge AI platform", tags: "Edge AI · Computer vision · MLOps", color: "var(--edge)" },
-  { id: "codecraft", n: "02", name: "Code Craft AI", line: "Chat and voice to robot programs", tags: "AI agents · Structured output", color: "var(--craft)" },
-  { id: "pramoj", n: "03", name: "Pramoj AI", line: "Idea to a working IoT app on real hardware", tags: "Generative AI · Agent workflows", color: "var(--pramoj)" },
-  { id: "petalyellow", n: "04", name: "Petal Yellow AI", line: "Grounded health and fitness assistant", tags: "Grounded AI · Tool calling", color: "var(--yellow)" },
+const INDEX: ShowcaseProject[] = [
+  { id: "petaledge", n: "01", name: "PetalEdge", kind: "Edge AI platform", line: "End-to-end Edge AI platform for training, optimizing and deploying computer vision and motion models.", tags: "Edge AI · Computer vision · MLOps", color: "var(--edge)" },
+  { id: "codecraft", n: "02", name: "Code Craft AI", kind: "AI agent", line: "AI-powered workflow that transforms natural language into structured programs for connected hardware.", tags: "AI agents · Structured output", color: "var(--craft)" },
+  { id: "pramoj", n: "03", name: "Pramoj AI", kind: "Generative AI workflow", line: "Generative AI platform that turns ideas into working IoT applications on real hardware.", tags: "Generative AI · Agent workflows", color: "var(--pramoj)" },
+  { id: "petalyellow", n: "04", name: "Petal Yellow AI", kind: "Personalized AI", line: "Personalized AI health and fitness platform with intelligent insights and multiple AI-powered features.", tags: "Grounded AI · Tool calling", color: "var(--yellow)" },
 ];
 
 export function WorkIntro() {
@@ -21,11 +22,14 @@ export function WorkIntro() {
       </div>
 
       <h2 id="work-title" className="sr-only">Selected work</h2>
-      <ScrollDrift from={4} to={-6} className="mt-10 whitespace-nowrap">
-        <p aria-hidden="true" className="display text-[clamp(3rem,11vw,13rem)] uppercase">
-          Selected <span className="font-serif font-normal normal-case italic tracking-normal text-accent" style={{ fontVariationSettings: "normal" }}>work</span>
-        </p>
-      </ScrollDrift>
+      {/* Aligned to the content column; drifts only rightward from it, so it never clips. */}
+      <div className="mx-auto max-w-[1500px]">
+        <ScrollDrift from={6} to={0} className="mt-10 w-fit whitespace-nowrap">
+          <p aria-hidden="true" className="display text-[clamp(2.6rem,9.5vw,11rem)] uppercase">
+            Selected <span className="font-serif font-normal normal-case italic tracking-normal text-accent" style={{ fontVariationSettings: "normal" }}>work</span>
+          </p>
+        </ScrollDrift>
+      </div>
 
       <div className="mx-auto max-w-[1500px]">
         <Reveal>
@@ -36,29 +40,7 @@ export function WorkIntro() {
           </p>
         </Reveal>
 
-        <ol className="mt-16" aria-label="Project index">
-          {INDEX.map((p, i) => (
-            <Reveal as="li" key={p.id} delay={i * 70}>
-              <a
-                href={`#${p.id}`}
-                className="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-4 border-t border-line py-6 transition-colors md:grid-cols-[4rem_1.2fr_1fr_auto]"
-                style={{ ["--c" as string]: p.color }}
-              >
-                <span className="font-mono text-xs text-muted">{p.n}</span>
-                <span className="text-2xl font-semibold tracking-tight text-fg transition-colors duration-300 group-hover:text-[var(--c)] md:text-4xl">
-                  {p.name}
-                </span>
-                <span className="hidden text-sm text-muted md:block">
-                  {p.line}
-                  <span className="mt-1 block font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted/70">{p.tags}</span>
-                </span>
-                <span className="text-xl text-muted transition-transform duration-500 group-hover:translate-x-1 group-hover:text-[var(--c)]" aria-hidden="true">
-                  ↘
-                </span>
-              </a>
-            </Reveal>
-          ))}
-        </ol>
+        <WorkShowcase projects={INDEX} />
       </div>
     </div>
   );

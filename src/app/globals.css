@@ -168,6 +168,44 @@ body {
   background-image: radial-gradient(rgba(241, 237, 228, 0.12) 1px, transparent 1px);
   background-size: 18px 18px;
 }
+
+/* Selected-work depth cards (WorkShowcase). Pointer moves set --rx/--ry/--bx/--by/--gx/--gy.
+   Hovering eases quickly toward the cursor; leaving drifts slowly back to flat. */
+.depth-card {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.9);
+  transition:
+    transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+    box-shadow 1s cubic-bezier(0.445, 0.05, 0.55, 0.95),
+    border-color 0.6s ease;
+  will-change: transform;
+}
+.depth-card[data-hover] {
+  border-color: color-mix(in srgb, var(--c) 45%, transparent);
+  box-shadow:
+    0 40px 70px -30px rgba(0, 0, 0, 0.95),
+    0 0 50px -18px color-mix(in srgb, var(--c) 55%, transparent);
+  transition:
+    transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.6s ease;
+}
+.depth-bg {
+  transform: translate3d(var(--bx, 0px), var(--by, 0px), 0);
+  transition: transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+.depth-card[data-hover] .depth-bg {
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.depth-gloss {
+  background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.09), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.depth-card[data-hover] .depth-gloss {
+  opacity: 1;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {

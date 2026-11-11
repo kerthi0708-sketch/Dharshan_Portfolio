@@ -73,11 +73,13 @@ export function WordsReveal({ text, className = "", stagger = 22 }: { text: stri
       <span className="sr-only">{text}</span>
       <span aria-hidden="true">
         {words.map((w, i) => (
-          <span key={i} className="inline-block overflow-hidden align-bottom">
+          // The mask extends below the line box (padding cancelled by a negative margin) so
+          // descenders like g, j, p and y aren't clipped by the tight display line-height.
+          <span key={i} className="-mb-[0.22em] inline-block overflow-hidden pb-[0.22em] align-bottom">
             <span
               className="inline-block"
               style={{
-                transform: shown ? "none" : "translate3d(0,105%,0)",
+                transform: shown ? "none" : "translate3d(0,130%,0)",
                 transition: `transform 1s cubic-bezier(0.16,1,0.3,1) ${i * stagger}ms`,
               }}
             >
