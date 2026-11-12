@@ -126,7 +126,7 @@ export function CodeCraft() {
               <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">Five response tasks</p>
               <dl className="mt-4">
                 {TASKS.map((t) => (
-                  <div key={t.k} className="flex flex-wrap items-baseline justify-between gap-x-4 border-t border-line py-2.5">
+                  <div key={t.k} className="flex flex-col gap-0.5 border-t border-line py-2.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-4">
                     <dt className="font-mono text-xs text-craft">{t.k}</dt>
                     <dd className="text-sm text-muted">{t.v}</dd>
                   </div>
