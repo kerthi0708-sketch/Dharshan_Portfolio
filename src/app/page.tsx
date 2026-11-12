@@ -8,7 +8,6 @@ import { Pramoj } from "@/components/work/pramoj/Pramoj";
 import { PetalYellow } from "@/components/work/petalyellow/PetalYellow";
 import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
-import { Education } from "@/components/sections/Education";
 import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
@@ -27,7 +26,6 @@ export default function Home() {
           <PetalYellow />
         </section>
         <Skills />
-        <Education />
         <Contact />
       </main>
     </>

@@ -206,6 +206,16 @@ body {
 .depth-card[data-hover] .depth-gloss {
   opacity: 1;
 }
+
+/* Experience & Education turning wheel */
+.turning-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.turning-rail {
+  transition: height 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
